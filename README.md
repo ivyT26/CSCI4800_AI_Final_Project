@@ -12,3 +12,5 @@ Progress 11/21
   - worked with two hyperparameters, is left of center and steering angle
   - if the deepracer's steering angle is negative (turning left) and is left of center or vice versa, the deepracer will be penalized
   - if the deepracer's steering angle is negative (turning left) and is right of center or vice versa, the deepracer will be rewarded
+
+**Mental Note: if you want to update the reward function, please make a pull request :)**
