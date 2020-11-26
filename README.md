@@ -7,6 +7,8 @@
 **Mental Note: if you want to update the reward function, please make a pull request :)**  
 **Include Later: add notes about development of project in local environment before using AWS console to train DeepRacer**  
 
+**Next day: try reward function using closest_waypoints code on AWS developer guide**
+
 ##### Progress 11/21 
 - trained DeepRacer for 10 minutes each training, evaluated for 3-4 trials
 - learned about reward functions examples and testing on AWS
