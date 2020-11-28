@@ -8,7 +8,7 @@ def reward_function(params):
     distance_from_center = params['distance_from_center']
     steering_angle = params['steering_angle']
     is_left_of_center = params['is_left_of_center']
-    
+    progress = params['progress']
     
     # Calculate 3 markers that are at varying distances away from the center line
     marker_1 = 0.1 * track_width
@@ -38,5 +38,8 @@ def reward_function(params):
     elif is_left_of_center == False and steering_angle > 0:
         reward *= 1.4
     
+    # Reward the deepracer based on progess after 25% completion.
+    if progress >= 25:
+        reward = reward * (1 + (progress / 100))
     
     return float(reward)
