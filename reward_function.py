@@ -28,20 +28,20 @@ def reward_function(params):
       
     # Check if Deepracer is left of center and turning left, give penality  
     if is_left_of_center == True and steering_angle > 0:
-        reward *= 0.8
+        reward *= 0.9
     # Check if Deepracer is left of center and turning right, give reward
     elif is_left_of_center == True and steering_angle < 0:
-        reward *= 1.4
+        reward *= 1.1
         # Check if Deepracer is right of center and turning right, give penality
     elif is_left_of_center == False and steering_angle < 0:
-        reward *= 0.8
+        reward *= 0.9
     # Check if Deepracer is right of center and turning left, give reward
     elif is_left_of_center == False and steering_angle > 0:
-        reward *= 1.4
+        reward *= 1.1
         
     # Reward the deepracer based on progress made after completing 25% of the track.
     if progress >= 25:
-        reward = reward * (1 + ((progress / 4) / 100))
+        reward = reward * (1 + ((progress / 4) / 1000)) # 25% -> 1.0062 // 60% -> 1.015
     
     
     return float(reward)
