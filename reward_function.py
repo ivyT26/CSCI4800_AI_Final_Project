@@ -1,12 +1,4 @@
-# V6
-
-'''
-Cloned V3 using a modified version of V4-2's code. We wanted to implement higher reward initializations 
-(i.e., 10.0, 5.0, 1.0, 1e-3) instead of (1.0, 0.5, 0.1, and 1e-6). We also wanted to try adding and subtracting rewards
-instead of using multiplication to increase or decrease rewards by a percentage. We will also have a check at the end
-of the reward function to see if the reward is negative, and if it is we will change the reward to a small value such
-as 1e-6. We wanted to start these changes from a model that had a successful Reward graph such as V3.
-'''
+# V7
 
 def reward_function(params):
     '''
@@ -19,6 +11,7 @@ def reward_function(params):
     steering_angle = params['steering_angle']
     is_left_of_center = params['is_left_of_center']
     progress = params['progress']
+    speed = params['speed']
     
     
     # Calculate 3 markers that are at varying distances away from the center line
@@ -39,7 +32,7 @@ def reward_function(params):
     # Check if Deepracer is left of center and turning left, give penalty  
     if is_left_of_center == True and steering_angle > 0:
         reward -= 1.0
-    # Check if Deepracer is left of center and turning right, give reward
+        # Check if Deepracer is left of center and turning right, give reward
     elif is_left_of_center == True and steering_angle < 0:
         reward += 1.0
         # Check if Deepracer is right of center and turning right, give penalty
@@ -52,6 +45,12 @@ def reward_function(params):
     # Reward the deepracer based on progress made after completing 25% of the track.
     if progress >= 25:
         reward = reward + (progress / 100) # 25% -> reward + 0.25 // 60% -> reward + 0.60
+        
+    # Reward the deepracer if it's speed is higher than 1.0 m/s, otherwise penalize it
+    if speed > 1.0:
+        reward += 0.5
+    else:
+        reward -= 0.5
     
     # Check if reward is 0 or below and if so make reward a small decimal value    
     if reward <= 0.0:
