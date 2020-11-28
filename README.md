@@ -9,6 +9,9 @@
 
 **Next day: try reward function using closest_waypoints code on AWS developer guide**
 
+### Note: A new version of the DeepRacer training (ie. V3 to V4) means that a new functionality or portion of code was added to a previous version of the training tested to enhance reward function. Description will note which version was cloned to add the new functionality. 
+### Note: A sub version of the DeepRacer training (ie. V3 to V3-1) means that the current reward function for that version had values that were modified to enhance reward function. 
+
 ##### Progress 11/21 
 - trained DeepRacer for 10 minutes each training, evaluated for 3-4 trials
 - learned about reward functions examples and testing on AWS
@@ -37,6 +40,15 @@
     -> (trained with this update)
 - so far, trained DeepRacer for 45 minutes making incremental changes to the reward function
 - final updated reward function did not go well, the evaluation was worse than when it was evaluated at V4-1
+
+##### Progress 11/28
+- trained DeepRacer for 15 minutes each training, evaluated 4-5 trials
+- retrained the DeepRacer by cloning V3 and using reward function from V4-2 (V5)
+  - the DeepRacer did not improve, got worse as more training was done
+- research: changed from multiplication approach to additive approach (reference: Advanced Guide To AWS DeepRacer)
+  - article taked about subrewards, if the DeepRacer made a good choice for making a turn but is not moving at optimal speed, the multiplication approach wouldn't reflect that the DeepRacer made a good choice for turning correctly and not care about improving the subrewards for turning. 
+  - V6: cloned V3, copied V4-2's code, and modified code from V4-2. Wanted to train new code on the last successful training simulation to see if new updates improved the DeepRacer's driving. 
+    - after training: there were some zig zags for the reward, training, and evaluation
 
 ##### Sources
 DeepRacer Reward Functions 
