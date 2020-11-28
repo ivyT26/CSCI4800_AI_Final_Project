@@ -1,3 +1,4 @@
+# V5
 def reward_function(params):
     '''
     Example of rewarding the agent to follow center line
@@ -26,13 +27,13 @@ def reward_function(params):
     else:
         reward = 1e-6  # likely crashed/ close to off track
       
-    # Check if Deepracer is left of center and turning left, give penality  
+    # Check if Deepracer is left of center and turning left, give penalty  
     if is_left_of_center == True and steering_angle > 0:
         reward *= 0.9
     # Check if Deepracer is left of center and turning right, give reward
     elif is_left_of_center == True and steering_angle < 0:
         reward *= 1.1
-        # Check if Deepracer is right of center and turning right, give penality
+        # Check if Deepracer is right of center and turning right, give penalty
     elif is_left_of_center == False and steering_angle < 0:
         reward *= 0.9
     # Check if Deepracer is right of center and turning left, give reward
