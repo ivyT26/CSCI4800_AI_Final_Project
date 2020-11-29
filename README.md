@@ -5,13 +5,20 @@
 #### Main goal now: To make sure the DeepRacer is driving within the track and can consistently complete a lap
 
 **Mental Note: if you want to update the reward function, please make a pull request :)**  
-**Include Later: add notes about development of project in local environment before using AWS console to train DeepRacer**  
 
 #### Note: A new version of the DeepRacer training (ie. V3 to V4) means that a new functionality or portion of code was added to a previous version of the training tested to enhance reward function. Description will note which version was cloned to add the new functionality. 
 #### Note: A sub version of the DeepRacer training (ie. V3 to V3-1) means that the current reward function for that version had values that were modified to enhance reward function. The sub version of the DeepRacer training could also mean that more training was added to increase the DeepRacer's knowledge and improve on its performance. 
 
-##### Local environment Problems
-- add later :)
+##### Local environment Problems / Tasks Prior to Using AWS Console to test DeepRacer (before 11/21)
+At the time of our proposal we were thinking we would use a Monte Carlo Reinforcement Learning algorithm, but now after learning more in the class and after going over Function Approximation, we feel that we will need to use this method instead. This will be a good fit for our Reinforcement Learning model due to the fact that the deep racer is in a continuous environment with an extremely large number of states and actions that it performs. This is just an idea just because we are unsure if we need to implement our own learning algorithm for the deep racer or if we can adjust the current algorithm used by AWS.
+
+For designing the reward function, we plan on using a greedy approach to train the deep racer. The reward function will be based on how far or close the deep racer is to the center of the track, using the parameter, distance_from_center. We will also use the parameter, all_wheels_on_track, to adjust the reward function if the deep racer is moving away from the center of the track and is at the critical point of moving off track. At this point in the project and due to time constraints, we have narrowed our scope to focus on training the deep racer to stay on the track. If we are able to progress quickly and can get the deep racer to follow the track, we will consider implementing code to adjust the speed of the deep racer to reduce lap times.
+
+Since the project proposal, we have been working on setting up our local environments to train the deep racer using the github repository by Alex Schultz. We also received our Goliath credentials so we can do our local training there. During the process, we ran into a lot of issues with setting up the local environment. 
+
+We had issues deciding which route to go, either doing a dual boot or using a virtual box. We decided to go with the virtual box because it allowed us to get the Ubuntu operating system functional in a quicker and easier way. The downside is that the virtual box is pretty slow. We are still having some issue with our local environment. One problem we had with setting up the environment was that the training log was not displaying after the training started. While doing some research, we figured out that the problem occurred while running ./init.sh, where some of the libraries were incompatible with the installed urllib3. This led to an improper installation of the docker containers. When the training started using ./start.sh, and the command ‘docker ps’ was executed, it only showed two containers, the minio container and the robo container, and the third container, rl_coach, did not exist. We are having trouble figuring out how to fix the current problem. One option was to adjust the settings in the deep racer setup to accommodate for the most recent versions of docker, docker-compose, and nvidia runtime. The other option was figuring out how to install earlier versions of some of these libraries so all the libraries needed to set up the environment are compatible with the set urllib3.
+
+After the project progress proposal, we have joined a deep racing community on Slack, deepracing.io, in order to ask questions and get assistance on setting up the local environment for the project. We were notified that the local environment we were setting up (by Alex Schultz) was a deprecated github, and was advised to use other github repos that were more updated (like mattcamp-local or deepracer-cloud). After setting up the environment using a more updated version of the local environment, we ran into many new problems where the logs still didn't show up or the visuals on the DeepRacer did not load up correctly. Since both of us spent many weeks on setting up the local environment and with the limited time left in the semester to work on the project, we decided to shift to using the AWS DeepRacer console to start working on our reward function for the DeepRacer. 
 
 **Main track trained and evaluated on: re:Invent 2018**
 
@@ -69,6 +76,16 @@
   - after training: steeper positive slope observed, higher completion rate for the training and evaluation
   - after evaluation: DeepRacer was able to complete 2 laps in a row (almost 3 laps!, last lap was 98% completion)
 - Maybe next time?: try reward function using closest_waypoints code on AWS developer guide (to improve speed and accuracy of turns?)
+
+##### Progress 11/29
+- trained DeepRacer for 15 minutes each, evaluated for 5 trials
+- V8-2: let the DeepRacer train for another 15 minutes to see if the improvement was consistent
+  - evaluation was pretty consistent with the last evaluation, where the DeepRacer was able to complete 2 laps in a row (almost 3!)
+- V8-3: modified the speed threshold because the condition was never met after looking through the logs
+  - changed speed if statement to see if the DeepRacer could maintain a speed >= 0.65 m/s rather than > 1.0 m/s
+  - after training, the DeepRacer improved in average lap completion and training
+    - overall reward did decrease because it was penalized for driving at a speed less than 0.65 m/s
+  - after evaluation, the DeepRacer was able to drive a little bit faster. after completing a lap, the time for completion was 28 seconds, compared to the 30 seconds of completion observed in the last few trainings
 
 ##### Sources
 DeepRacer Reward Functions 
