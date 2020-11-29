@@ -1,4 +1,4 @@
-# V8
+# V8-1
 
 def reward_function(params):
     
@@ -38,7 +38,7 @@ def reward_function(params):
     if all_wheels_on_track:
         reward += 1.0
     else:
-        reward -= 2.0
+        reward -= 3.0
     
     # Check if reward is 0 or below and if so make reward a small decimal value    
     if reward <= 0.0:
