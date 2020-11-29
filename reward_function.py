@@ -1,4 +1,4 @@
-# V8-1
+# V8-3
 
 def reward_function(params):
     
@@ -29,7 +29,7 @@ def reward_function(params):
         reward = reward + (progress / 100) # 25% -> reward + 0.25 // 60% -> reward + 0.60
         
     # Reward the deepracer if it's speed is higher than 1.0 m/s, otherwise penalize it
-    if speed > 1.0:
+    if speed > 0.65:
         reward += 0.5
     else:
         reward -= 0.5
