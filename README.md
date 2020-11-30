@@ -80,6 +80,7 @@ After the project progress proposal, we have joined a deep racing community on S
 ##### Progress 11/29
 - trained DeepRacer for 15 minutes each, evaluated for 5 trials
 - this was the day that we added the training logs, evaluation logs, and recorded some demo videos of the evaluations on the models
+  - Note: we were not able to upload the videos onto github because github does not support files greater than 25MB
 - also added a folder to hold the pictures of the tracks that we tested the DeepRacer on for reference
 - V8-2: let the DeepRacer train for another 15 minutes to see if the improvement was consistent
   - evaluation was pretty consistent with the last evaluation, where the DeepRacer was able to complete 2 laps in a row (almost 3!)
