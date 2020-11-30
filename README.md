@@ -71,7 +71,7 @@ After the project progress proposal, we have joined a deep racing community on S
   - was thinking of changing the code that makes sure the DeepRacer is on the track (is left of center and steering angle); main problem was that the DeepRacer would make a decision that would be detrimental when it turns (the car is on the left side of the center and needs to turn left, but the car will steer right to meet the requirement of staying on track
   - plan: since this is the best reward function overall, we plan to train with this reward function for another 15 minutes
     - will adjust hyperparameters if there are any converging values for the track completion (after 15 minutes)
-    - train again with updated reward function and hyperparameters
+    - train again with updated reward function and hyperparameters (update: did not adjust hyperparameters, did not want to risk a significant change in the model training with little knowledge and information on finding the ideal hyperparameters while modifying the reward function)
 - V8-1: trained V8 again for another 15 minutes and increased the penalty value to -3 if the DeepRacer drives off track
   - after training: steeper positive slope observed, higher completion rate for the training and evaluation
   - after evaluation: DeepRacer was able to complete 2 laps in a row (almost 3 laps!, last lap was 98% completion)
@@ -79,6 +79,7 @@ After the project progress proposal, we have joined a deep racing community on S
 
 ##### Progress 11/29
 - trained DeepRacer for 15 minutes each, evaluated for 5 trials
+- this was the day that we added the training logs, evaluation logs, and recorded some demo videos of the training models
 - V8-2: let the DeepRacer train for another 15 minutes to see if the improvement was consistent
   - evaluation was pretty consistent with the last evaluation, where the DeepRacer was able to complete 2 laps in a row (almost 3!)
 - V8-3: modified the speed threshold because the condition was never met after looking through the logs
@@ -86,13 +87,24 @@ After the project progress proposal, we have joined a deep racing community on S
   - after training, the DeepRacer improved in average lap completion and training
     - overall reward did decrease because it was penalized for driving at a speed less than 0.65 m/s
   - after evaluation, the DeepRacer was able to drive a little bit faster. after completing a lap, the time for completion was 28 seconds, compared to the 30 seconds of completion observed in the last few trainings
+- V8-4: trained V8-3 model for another 15 minutes
+  - training did fluctuate, rward graph had some negative slopes
+  - evaluation: did not complete a lap to 100% out of the 5 trials 
+- V8-5: trained V8-4 model for another 15 minutes
+  - training improved, very positive slope for the training and evaluation, while the overall slope compared to the previous trainings did decrease but had a positive slope when the DeepRacer made good decisions
+  - for the evaluation, the DeepRacer was able to complete all 5 laps 100% complete, wherethe fastest time was 26.5 seconds
+- V8-6: trained V8-5 model on a new track, Shanghai Sudu Raceway, since the overall training and evalauation for the previous few trainings produced good results
+  - we decided to chose this track since it was similar to the previous track we trained the model on and we wanted to observe how it would train for the first 15 minutes
+  - after training, the DeepRacer did not do well; the overall track completion was about 25%, but the slope of the training and evaluation was not a significant negative slope
+  - we asssume that the DeepRacer will do better as we train the DeepRacer more on the new track
 
 ##### Sources
 DeepRacer Reward Functions 
 - https://towardsdatascience.com/an-advanced-guide-to-aws-deepracer-2b462c37eea
 - https://codelikeamother.uk/planning-a-training
 - https://youtu.be/rpMus-mj4fo
-- adding reward for progress: https://github.com/Usin2705/DeepRacer
+- https://github.com/scottpletcher/deepracer
+- https://medium.com/axel-springer-tech/how-to-win-aws-deepracer-ce15454f594a 
 
 David Silver Lecture 6 : Value Function Approximation  
 https://youtu.be/UoPei5o4fps
