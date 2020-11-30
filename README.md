@@ -18,7 +18,7 @@ Since the project proposal, we have been working on setting up our local environ
 
 We had issues deciding which route to go, either doing a dual boot or using a virtual box. We decided to go with the virtual box because it allowed us to get the Ubuntu operating system functional in a quicker and easier way. The downside is that the virtual box is pretty slow. We are still having some issue with our local environment. One problem we had with setting up the environment was that the training log was not displaying after the training started. While doing some research, we figured out that the problem occurred while running ./init.sh, where some of the libraries were incompatible with the installed urllib3. This led to an improper installation of the docker containers. When the training started using ./start.sh, and the command ‘docker ps’ was executed, it only showed two containers, the minio container and the robo container, and the third container, rl_coach, did not exist. We are having trouble figuring out how to fix the current problem. One option was to adjust the settings in the deep racer setup to accommodate for the most recent versions of docker, docker-compose, and nvidia runtime. The other option was figuring out how to install earlier versions of some of these libraries so all the libraries needed to set up the environment are compatible with the set urllib3.
 
-After the project progress proposal, we have joined a deep racing community on Slack, deepracing.io, in order to ask questions and get assistance on setting up the local environment for the project. We were notified that the local environment we were setting up (by Alex Schultz) was a deprecated github, and was advised to use other github repos that were more updated (like mattcamp-local or deepracer-cloud). After setting up the environment using a more updated version of the local environment, we ran into many new problems where the logs still didn't show up or the visuals on the DeepRacer did not load up correctly. Since both of us spent many weeks on setting up the local environment and with the limited time left in the semester to work on the project, we decided to shift to using the AWS DeepRacer console to start working on our reward function for the DeepRacer. 
+After the project progress proposal, we have joined a deep racing community on Slack, deepracing.io, in order to ask questions and get assistance on setting up the local environment for the project. We were notified that the local environment we were setting up (by Alex Schultz) was a deprecated github, and was advised to use other github repos that were more updated (like mattcamp-local or deepracer-cloud). After setting up the environment using a more updated version of the local environment, we ran into many new problems where the logs produced lots of errors or the visuals on the DeepRacer did not load up correctly and was difficult to debug. Other problems with setting up the local environment were opening up browsers in localhost using a virtual box. Since both of us spent many weeks on setting up the local environment and with the limited time left in the semester to work on the project, we decided to shift to using the AWS DeepRacer console to start working on our reward function for the DeepRacer. 
 
 **Main track trained and evaluated on: re:Invent 2018**
 
@@ -79,7 +79,8 @@ After the project progress proposal, we have joined a deep racing community on S
 
 ##### Progress 11/29
 - trained DeepRacer for 15 minutes each, evaluated for 5 trials
-- this was the day that we added the training logs, evaluation logs, and recorded some demo videos of the training models
+- this was the day that we added the training logs, evaluation logs, and recorded some demo videos of the evaluations on the models
+- also added a folder to hold the pictures of the tracks that we tested the DeepRacer on for reference
 - V8-2: let the DeepRacer train for another 15 minutes to see if the improvement was consistent
   - evaluation was pretty consistent with the last evaluation, where the DeepRacer was able to complete 2 laps in a row (almost 3!)
 - V8-3: modified the speed threshold because the condition was never met after looking through the logs
@@ -88,15 +89,21 @@ After the project progress proposal, we have joined a deep racing community on S
     - overall reward did decrease because it was penalized for driving at a speed less than 0.65 m/s
   - after evaluation, the DeepRacer was able to drive a little bit faster. after completing a lap, the time for completion was 28 seconds, compared to the 30 seconds of completion observed in the last few trainings
 - V8-4: trained V8-3 model for another 15 minutes
-  - training did fluctuate, rward graph had some negative slopes
+  - training did fluctuate, reward graph had some negative slopes
   - evaluation: did not complete a lap to 100% out of the 5 trials 
 - V8-5: trained V8-4 model for another 15 minutes
   - training improved, very positive slope for the training and evaluation, while the overall slope compared to the previous trainings did decrease but had a positive slope when the DeepRacer made good decisions
-  - for the evaluation, the DeepRacer was able to complete all 5 laps 100% complete, wherethe fastest time was 26.5 seconds
-- V8-6: trained V8-5 model on a new track, Shanghai Sudu Raceway, since the overall training and evalauation for the previous few trainings produced good results
+  - for the evaluation, the DeepRacer was able to complete all 5 laps 100% complete, wherethe fastest time was 26.5 seconds!
+- V8-6: trained V8-5 model on a new track, Shanghai Sudu Training, since the overall training and evalauation for the previous few trainings produced good results
   - we decided to chose this track since it was similar to the previous track we trained the model on and we wanted to observe how it would train for the first 15 minutes
-  - after training, the DeepRacer did not do well; the overall track completion was about 25%, but the slope of the training and evaluation was not a significant negative slope
+  - after training: the DeepRacer did not do well; the overall track completion was about 25%, but the slope of the training and evaluation was not a significant negative slope
   - we assume that the DeepRacer will do better as we train the DeepRacer more on the new track
+  - after evaluation: the DeepRacer was able to complete about 60% of the track for 2 of the trials, 52% for 1 of the trials, and the rest were outliers (less than 30%); our observation is that training the DeepRacer model for a longer time will show signs of improvement in lap completion
+  - we also want to see if the reward function can help generalize the DeepRacer's knowledge so it can drive accurately on any track as it experiences a variety of tracks; after that and for future work on this project, we could work on improving the lap times or continue focusing on letting the DeepRacer make more accurate decisions (like speeding up on straights or finding optimal steering angle for different turns)
+- V8-7: trained V8-6 model on Shanghai Sudu Training track to see if more training using the same reward function would improve the track completion
+  - after training: the overall percentage of the track completed did increase from about 25% to about 55%, which shows that the reward function can be used to generalize how to train the DeepRacer on different tracks and improving the accuracy of its decisions overall
+  - after evaluation: DeepRacer did well after 30 minutes of training! Out of the 5 trials, the DeepRacer completed 4 laps with 100% completion and consecutively as well!
+  - observation: very interesting to note that the DeepRacer did not practice many right turns in the first track (re:Invent 2018), so it did take some training time to learn how to turn right for the Shanghai track
 
 ##### Sources
 DeepRacer Reward Functions 
@@ -105,6 +112,7 @@ DeepRacer Reward Functions
 - https://youtu.be/rpMus-mj4fo
 - https://github.com/scottpletcher/deepracer
 - https://medium.com/axel-springer-tech/how-to-win-aws-deepracer-ce15454f594a 
+- https://medium.com/vaibhav-malpanis-blog/getting-started-with-deepracer-2020-edition-a7896dd07c48 
 
 David Silver Lecture 6 : Value Function Approximation  
 https://youtu.be/UoPei5o4fps
