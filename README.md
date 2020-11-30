@@ -96,7 +96,7 @@ After the project progress proposal, we have joined a deep racing community on S
 - V8-6: trained V8-5 model on a new track, Shanghai Sudu Raceway, since the overall training and evalauation for the previous few trainings produced good results
   - we decided to chose this track since it was similar to the previous track we trained the model on and we wanted to observe how it would train for the first 15 minutes
   - after training, the DeepRacer did not do well; the overall track completion was about 25%, but the slope of the training and evaluation was not a significant negative slope
-  - we asssume that the DeepRacer will do better as we train the DeepRacer more on the new track
+  - we assume that the DeepRacer will do better as we train the DeepRacer more on the new track
 
 ##### Sources
 DeepRacer Reward Functions 
