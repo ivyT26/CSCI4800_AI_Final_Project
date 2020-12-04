@@ -105,6 +105,9 @@ After the project progress proposal, we have joined a deep racing community on S
   - after training: the overall percentage of the track completed did increase from about 25% to about 55%, which shows that the reward function can be used to generalize how to train the DeepRacer on different tracks and improving the accuracy of its decisions overall
   - after evaluation: DeepRacer did well after 30 minutes of training! Out of the 5 trials, the DeepRacer completed 4 laps with 100% completion and consecutively as well!
   - observation: very interesting to note that the DeepRacer did not practice many right turns in the first track (re:Invent 2018), so it did take some training time to learn how to turn right for the Shanghai track
+ 
+##### Updates 12/03 
+- evaluated the V8 models a few more times to verify the results obtained from the first evaluations for each model
 
 ##### Sources
 DeepRacer Reward Functions 
