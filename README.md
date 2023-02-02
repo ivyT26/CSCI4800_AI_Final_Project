@@ -1,8 +1,11 @@
-# CSCI4800_AI_Final_Project
+# CSCI4800_AI_Final_Project  
 
-### This will be a record of our progress for working with the DeepRacer
+This repository is a final project from the AI & Reinforced Learning course.  
+This course was taken at the University of Colorado Denver, Fall 2020. Professor: Ashis Biswas.  
 
-#### Main goal now: To make sure the DeepRacer is driving within the track and can consistently complete a lap
+### This will be a record of our progress for working with the DeepRacer  
+
+#### Main goal now: To make sure the DeepRacer is driving within the track and can consistently complete a lap  
 
 **Mental Note: if you want to update the reward function, please make a pull request :)**  
 
